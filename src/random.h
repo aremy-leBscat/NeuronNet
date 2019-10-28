@@ -17,7 +17,14 @@ public:
   A seed *s>0* can be provided, by default it is seeded with a *random_device*.
  */
 ///@{
-    RandomNumbers(unsigned long int s=0);
+    RandomNumbers(unsigned long int s=0){
+		if(s==0){
+		std::random_device rd;
+		rng= std::mt19937(rd());
+		} else {
+			rng= std::mt19937(s);
+		 };
+	 }
 ///@}
 
 /*! @name Distributions
@@ -28,11 +35,11 @@ public:
   The additional parameters are the standard parameters of these distributions.
  */
 ///@{
-    void uniform_double(std::vector<double>&, double lower=0, double upper=1);
+    void uniform_double(std::vector<double>& a_remplir, double lower=0, double upper=1);
     double uniform_double(double lower=0, double upper=1);
-    void normal(std::vector<double>&, double mean=0, double sd=1);
+    void normal(std::vector<double>& a_remplir, double mean=0, double sd=1);
     double normal(double mean=0, double sd=1);
-    void poisson(std::vector<int>&, double mean=1);
+    void poisson(std::vector<int>& a_remplir, double mean=1);
     int poisson(double mean=1);
 ///@}
 /*! @name Auxiliary function

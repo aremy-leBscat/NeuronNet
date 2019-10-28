@@ -68,7 +68,7 @@ void Simulation::parse_types(std::string types) {
         }
     }
     net.set_default_params(ntypes);
-    net.random_connect(degree, streng);
+    net.random_connect(degree, streng);  //////////// PBM ICI LE TYPE N EST PAS VOID MAIS SIZE_T !!!!
 }
 
 size_t Simulation::size_type(const std::string &_s) const {

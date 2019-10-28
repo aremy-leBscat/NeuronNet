@@ -75,9 +75,11 @@ TEST(networkTest, connect) {
     double stren = 6.;
     std::pair<size_t, double> expec{nlink, -2*stren*nlink};
 // --- add 3 links from inhibitors to same excitatory
+
+	
     for (size_t inhib_idx=0; inhib_idx<net.size() && nlink>0; inhib_idx++) 
         if ((net.neuron(inhib_idx).is_inhibitory())
-            && net.add_link(excit_idx, inhib_idx, stren))
+            && net.add_link(excit_idx, inhib_idx, stren)) 
             nlink--;
     EXPECT_EQ(expec, net.degree(excit_idx));
     std::vector<double> noisev(nlinks, noise);
@@ -86,6 +88,7 @@ TEST(networkTest, connect) {
 // --- should fire once within 10 time steps
     for (size_t t=0; t<10; t++) {
         net.step(noisev);
+       
         ifirs += (int)net.neuron(inhib1).firing();
         efirs += (int)net.neuron(excit_idx).firing();
     }
